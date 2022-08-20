@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MyFlaskApp</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="{{ url_for('static', filename='manager.css') }}">
+
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type="text/javascript">
+     google.charts.load("current", {packages:['corechart']});
+     google.charts.setOnLoadCallback(drawSarahChart);
+
+    google.charts.setOnLoadCallback(drawAnthonyChart);
+
+    function drawSarahChart() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Topping');
+      data.addColumn('number', 'Slices');
+      data.addRows([
+      {%- for dayname, num in sales_yearl.items() %}
+      ['{{ dayname }}', {{ num }}],
+      {%- endfor %}
+      ]);
+      
+
+      var options = {title:'SALES BY YEAR',
+                     legend: 'none',
+                     hAxis:{
+                        title:'YEAR'
+                     },
+                     vAxis: {
+                       title:'UNITS OF SALES',
+                      baseline: 0
+                    },
+                    colors: ['#41d6b1','#41d6b1']
+                  };
+
+      
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_values'));
+
+      
+      chart.draw(data, options);
+    }
+
+
+
+     
+   </script>
+
+  </head>
+  <body>
+    <header class="header">
+      <a href="http://127.0.0.1:8000/" class="logo"> <img src="{{url_for('static',filename='images/crm-icon-high-seas.png')}}" width="80" height="80" >Hello {{user_name|capitalize}}</a>
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn"><span class="nav-icon">
+        
+      </span></label> 
+      <ul class="menu">
+          <li><a href="/manager/sales">Sales</a></li>
+          <li><a href="/manager/employees" >Employees</a></li>
+          <li><a href="/manager/profile">Profile</a></li>
+          <li><a href="/manager/my_performance">MyPerformance</a></li>
+      </ul>
+  </header>
+    <div class="container" id="chart1">
+      <div class="row justify-content-md-center">
+        <div class="col">
+            {%- for dayname in sales_area.items() %}
+                <h1>{{dayname}}</h1>
+         {%- endfor %}
+        </div>  
+      </div>
+  </div>
+
+  </body>
+</html>
+

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel = "icon" href ="{{url_for('static',filename='images/crm-icon-high-seas.png')}}">
+    <title>Customer Relationship Management</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+    <div class="main">
+        <div class="navbar">
+            <div class="icon">
+                <a href="#"> <img src="{{url_for('static',filename='images/crm-icon-high-seas.png')}}" width="80" height="80" ></a>
+            </div>
+            <div class="menu">
+                <ul>
+                    <li><a href="#">HOME</a></li>
+                    <li><a href="#">ABOUT</a></li>
+                    <li><a href="#">SERVICE</a></li>
+                    <li><a href="#">DESIGN</a></li>
+                    <li><a href="http://cse.iitkgp.ac.in/~chandrapsc/">CONTACT</a></li>
+                </ul>
+            </div>
+            <div class="search">
+                <input class="srch" type="search" name="" placeholder="Type To text">
+                <a href="#"> <button class="btn">Search</button></a>
+            </div>
+            <div class="content">
+                <h1>Cutomer Relationship Management</h1>
+                <p class="par">Customer relationship management (CRM) software basically connects a client to its customer base. These are the basic functionalities of this software :
+
+                    Store customer contact information
+                    Record service issues
+                    Manage feedback of the customer base of a particular client. 
+                    Analyze the feedback of a particular client and suggests some areas where the client has to improve in order to improve its relationship with its user
+                    Help a client target potential user base based on the information stored on the users activity 
+                    </p>
+    
+                    <button class="cn"><a href="#">JOIN US</a></button>
+                    <div class="form">
+                        <h2>Login Here</h2>
+                        <form action="/" method = "post">
+                            <input type="number" name="id" placeholder="Enter id Here">
+                            <input type="password" name="pswrd" placeholder="Enter Password Here">
+                            <button type="submit" class="submit">Login</button>
+                            <p class="link">Don't have an account<br>
+                            <a href="#">Sign up </a> here</a></p>
+                            <p class="liw">Log in with</p>
+                            {% if error %}
+                                <p class="error" style="color:red"><strong>Error:</strong> {{ error }}
+                            {% endif %}
+                        </form>
+                        <div class="icons">
+                            <a href="#"><ion-icon name="logo-facebook"></ion-icon></a>
+                            <a href="#"><ion-icon name="logo-instagram"></ion-icon></a>
+                            <a href="#"><ion-icon name="logo-twitter"></ion-icon></a>
+                            <a href="#"><ion-icon name="logo-google"></ion-icon></a>
+                            <a href="#"><ion-icon name="logo-skype"></ion-icon></a>
+                        </div>
+    
+                    </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js"></script>
+    </body>
+    </html>
+    

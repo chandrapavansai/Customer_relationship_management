@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MyFlaskApp</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="{{ url_for('static', filename='divhead.css') }}">
+
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type="text/javascript">
+
+    // Load Charts and the corechart package.
+    google.charts.load('current', {'packages':['corechart']});
+
+    // Draw the pie chart for Sarah's pizza when Charts is loaded.
+    google.charts.setOnLoadCallback(drawSarahChart);
+
+    // Draw the pie chart for the Anthony's pizza when Charts is loaded.
+    google.charts.setOnLoadCallback(drawAnthonyChart);
+
+    // Callback that draws the pie chart for Sarah's pizza.
+    function drawSarahChart() {
+
+      // Create the data table for Sarah's pizza.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Topping');
+      data.addColumn('number', 'Slices');
+      data.addRows([
+      {%- for dayname, num in sales_yearly.items() %}
+      ['{{ dayname }}', {{ num }}],
+      {%- endfor %}
+      ]);
+      
+
+      // Set options for Sarah's pie chart.
+      var options = {title:'SALES BY YEAR',
+                     legend: 'none',
+                     hAxis:{
+                        title:'YEAR'
+                     },
+                     vAxis: {
+                       title:'UNITS OF SALES',
+                      baseline: 0
+                    },
+                    colors: ['#41d6b1','#41d6b1']
+                  };
+
+      // Instantiate and draw the chart for Sarah's pizza.
+      
+
+      var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_values'));
+
+      
+      chart.draw(data, options);
+    }
+
+
+    // Callback that draws the pie chart for Anthony's pizza.
+    function drawAnthonyChart() {
+
+      // Create the data table for Anthony's pizza.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'Topping');
+      data.addColumn('number', 'Slices');
+      data.addRows([
+      {%- for dayname, num in sales_location.items() %}
+      ['{{ dayname }}', {{ num }}],
+      {%- endfor %}
+      ]);
+
+      // Set options for Anthony's pie chart.
+      var options = {title:'SALES BY LOCATION (click to get yearwise analysis)',
+                      legend: 'none',
+                      hAxis:{
+                        title:'LOCATION NAME'
+                      },
+                      vAxis: {
+                        title:'UNITS OF SALES',
+                      baseline: 0
+                    },
+                    colors: ['#41d6b1','#41d6b1']
+                     };
+
+      // Instantiate and draw the chart for Anthony's pizza.
+      var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_values1'));
+      chart.draw(data, options);
+      
+      google.visualization.events.addListener(chart, 'select', function() {
+        // grab a few details before redirecting
+              var selection = chart.getSelection();
+              var row = selection[0].row;
+              var col = selection[0].column;
+              var ife  =data.getFormattedValue(row, 0)
+              var data3 = new google.visualization.DataTable();
+        
+              data3.addColumn('string', 'Topping');
+              data3.addColumn('number', 'Slices');
+              
+              var me=[
+              {%- for loc in sales_yearly_location.items() %}
+              {%- for  key,value in loc[1].items() %}
+              ['{{loc[0]}}','{{key}}',{{value}}],
+              {%- endfor %}
+              {%- endfor %}
+              ];
+              arr=[];
+              for (let i = 0; i < me.length; i++){
+                if(me[i][0]==ife) {
+                  console.log(me[i][1])
+                  arr.push([me[i][1],me[i][2]]);
+                }
+              };
+              data3.addRows(arr);
+              var options = {title:'SALES BY YEAR (for the clicked location)',
+                     legend: 'none',
+                     hAxis:{
+                        title:'YEAR'
+                     },
+                     vAxis: {
+                       title:'UNITS OF SALES',
+                      baseline: 0
+                    },
+                    colors: ['#41d6b1','#41d6b1']
+                  };
+
+                  var chart3 = new google.visualization.ColumnChart(document.getElementById('columnchart_values2'));
+                  chart3.draw(data3, options);
+            }
+      );
+    }
+  </script>
+  </head>
+  <body>
+    <header class="header">
+      <a href="http://127.0.0.1:8000/" class="logo"> <img src="{{url_for('static',filename='images/crm-icon-high-seas.png')}}" width="80" height="80" >Hello {{user_name|capitalize}}</a>
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn"><span class="nav-icon">
+        
+      </span></label>
+      <ul class="menu">
+        <li><a href="/division_head/sales">sales</a></li>
+        <li><a href="/division_head/profile" >profile</a></li>
+        <li><a href="/division_head/feedback">feedback</a></li>
+        <li><a href="/division_head/potential_userbase">potential userbase</a></li>
+    </ul>
+  </header>
+   
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-sm-3 col-md-5 chitti" style="background-color:rgb(255, 255, 255);">
+        <div id="columnchart_values" class="chart"></div>
+      </div>
+
+      <div class="col-sm-3 col-md-5 chitti" style="background-color:rgb(255, 255, 255);">
+        <div id="columnchart_values1" class="chart"></div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-3 col-md-5 chitti2" style="background-color:rgb(255, 255, 255);">
+        <div id="columnchart_values2" class="chart"></div>
+      </div>
+    </div>
+
+  </div>
+
+  </body>
+</html>
+

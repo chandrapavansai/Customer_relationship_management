@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MyFlaskApp</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="{{ url_for('static', filename='sales.css') }}">
+
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  </head>
+  <body>
+    <header class="header">
+      <a href="http://127.0.0.1:8000/" class="logo"> <img src="{{url_for('static',filename='images/crm-icon-high-seas.png')}}" width="80" height="80" >Hello {{user_name|capitalize}}</a>
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn"><span class="nav-icon">
+        
+      </span></label> 
+      <ul class="menu">
+        <li><a href="/division_head/sales">sales</a></li>
+        <li><a href="/division_head/profile" >profile</a></li>
+        <li><a href="/division_head/feedback">feedback</a></li>
+        <li><a href="/division_head/potential_userbase">potential userbase</a></li>
+    </ul>
+  </header>
+  <div class="container">
+    <table class="table table-hover ">
+
+        <thead>
+          <tr>
+            <th class="text-center" scope="col">User-id</th>
+            <th class="text-center" scope="col">Name</th>
+            <th class="text-center" scope="col">Email</th>
+            <th class="text-center" scope="col">Profession</th>
+            <th class="text-center" scope="col">Gender</th>
+            <th class="text-center" scope="col">Location</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for value in values%}
+              <tr>
+                <th class="text-center" scope="row">{{value[0]}}</th>
+                <td class="text-center">{{value[1]}}</td>
+                <td class="text-center">{{value[2]}}</td>
+                <td class="text-center">{{value[3]}}</td>
+                <td class="text-center">{{value[4]}}</td>
+                <td class="text-center">{{value[5]}}</td>
+            </tr>  
+          {% endfor %}
+       </tbody>
+    </table>
+  </div>
+
+
+  </body>
+</html>
+

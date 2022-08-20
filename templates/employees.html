@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MyFlaskApp</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="{{ url_for('static', filename='employee-manager.css') }}">
+  </head>
+  <body>
+    <header class="header">
+      <a href="http://127.0.0.1:8000/" class="logo"> <img src="{{url_for('static',filename='images/crm-icon-high-seas.png')}}" width="80" height="80" >Hello {{user_name|capitalize}}</a>
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <a href="/manager/employees/addemp" class="robo1">add employee</a>
+      <a href="/manager/employees/removeemp" class="robo2">remove employee</a>
+      <a href="/manager/employees/removeemp" class="robo3">view employee</a>
+          
+      <label class="menu-icon" for="menu-btn"><span class="nav-icon">
+        
+      </span></label>
+      <ul class="menu">
+        <li><a href="/manager/sales">Sales</a></li>
+        <li><a href="/manager/employees" >Employees</a></li>
+        <li><a href="/manager/profile">Profile</a></li>
+        <li><a href="/manager/rating">Rating</a></li>
+    
+      </ul>
+  </header>
+  </body>
+  
+<!-- </html>
+
+<a href="/manager/employees/addemp" class="robo1">add employee</a>
+<a href="/manager/employees/removeemp" class="robo2">remove employee</a>
+<a href="/manager/employees/removeemp" class="robo3">view employee</a> -->

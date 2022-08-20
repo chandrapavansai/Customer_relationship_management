@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet">
+<title>Bootstrap Simple Login Form with Blue Background</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+<style>
+	body {	
+		color: #fff;
+    padding-top: 100px;
+		background: rgba(32, 209, 171, 0.315);
+		font-family: 'Roboto', sans-serif;
+	}
+    .form-control{
+		height: 41px;
+		background: #f2f2f2;
+		box-shadow: none !important;
+		border: none;
+	}
+	.form-control:focus{
+		background: #e2e2e2;
+	}
+    .form-control, .btn{   
+        border-radius: 3px;
+    }
+    .btn{
+		margin-top: 10px;
+    	width: 100px;
+    }
+	.signup-form{
+		width: 390px;
+		margin: 30px auto;
+	}
+	.signup-form form{
+		color: #999;
+		border-radius: 3px;
+    	margin-bottom: 15px;
+        background: #fff;
+        box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+        padding: 30px;
+    }
+	.signup-form h2 {
+		color: #333;
+		font-weight: bold;
+        margin-top: 0;
+    }
+    .signup-form hr {
+        margin: 0 -30px 20px;
+    }    
+	.signup-form .form-group{
+		margin-bottom: 20px;
+	}
+    .signup-form .btn{    
+        font-size: 16px;
+        font-weight: bold;
+		background: #35b192;
+		border: none;
+    }
+	.signup-form .btn:hover, .signup-form .btn:focus{
+		background: #35b192 !important;
+        outline: none;
+	}
+    .signup-form a{
+		color: #fff;
+		text-decoration: underline;
+	}
+	.signup-form a:hover{
+		text-decoration: none;
+	}
+	.signup-form form a{
+		color: rgba(32, 209, 171, 0.315);
+		text-decoration: none;
+	}	
+	.signup-form form a:hover{
+		text-decoration: underline;
+		color: rgb(11, 61, 50);
+	}
+	.signup-form  a{
+		text-decoration: none;
+		color: rgb(11, 61, 50);
+	}
+    .signup-form .hint-text {
+		padding-bottom: 15px;
+		text-align: center;
+		color: rgb(11, 61, 50);
+	}
+    
+
+    .wrapper {
+    text-align: center;
+}
+
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+.button {
+    position: absolute;
+    top: 50%;
+}
+</style>
+</head>
+<body>
+<div class="signup-form">
+    <form action="/sales_rep/addsale" method="post">
+		<h2>Add Sale</h2>
+		<p>New sale! add here..</p>
+		<hr>
+
+		<div class="form-group">
+			<input type="number" class="form-control" name="user-id" placeholder="User Id" required="required">
+		</div>
+        <div class="form-group">
+        	<input type="number" class="form-control" name="sales-val" placeholder="sales-val" required="required">
+        </div>
+		<div class="form-group">
+        	<textarea type="susbject" class="form-control" name="field" placeholder="feedback" style="height:200px" maxlength="50"></textarea>
+        </div>
+		
+		<div class="form-group">
+			<div class="rate">
+				<input type="radio" id="star5" name="rate" value="5" />
+				<label for="star5" title="text">5 stars</label>
+				<input type="radio" id="star4" name="rate" value="4" />
+				<label for="star4" title="text">4 stars</label>
+				<input type="radio" id="star3" name="rate" value="3" />
+				<label for="star3" title="text">3 stars</label>
+				<input type="radio" id="star2" name="rate" value="2" />
+				<label for="star2" title="text">2 stars</label>
+				<input type="radio" id="star1" name="rate" value="1" />
+				<label for="star1" title="text">1 star</label>
+			  </div>
+        </div>
+
+		<div class="form-group">
+        <div class="wrapper">
+            <button type="submit" class="btn btn-primary btn-lg">Add Sale</button>
+		</div> 
+        </div>
+    </form>
+	<div class="hint-text"><a href="http://127.0.0.1:8000/sales_rep">Go back to Home</a></div>
+</div>
+</body>
+</html>

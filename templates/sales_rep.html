@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MyFlaskApp</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="{{ url_for('static', filename='service_staff.css') }}">
+  </head>
+  <body>
+    <header class="header">
+      <a href="http://127.0.0.1:8000/" class="logo"> <img src="{{url_for('static',filename='images/crm-icon-high-seas.png')}}" width="80" height="80" >Hello {{user_name|capitalize}}</a>
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-sm-1 col-md-1" style="background-color:rgb(255, 255, 255);float:right;">
+            <label class="menu-icon" for="menu-btn"><span class="nav-icon">
+            </div>
+            <div class="col-sm-1 col-md-1" style="background-color:rgb(255, 255, 255);float:right;">
+                </div>
+          <!-- <div class="col-sm-1 col-md-1" style="background-color:rgb(255, 255, 255);float:right;">
+                <a href="sales_rep/addsale" class="robo2" style="    text-decoration: none;
+                font-family: Arial;
+                font-weight: bold;
+                transition: 0.4s ease-in-out; ">Addsale</a>
+          </div> -->
+
+        </div>
+      </div>
+      </span></label>
+      <ul class="menu">
+          <li><a href="sales_rep/profile">profile</a></li>
+          <li><a href="sales_rep/addsale" >addsale</a></li>
+          <li><a href="sales_rep/performance">performance</a></li>
+      </ul>
+  </header>
+  </body>
+</html>

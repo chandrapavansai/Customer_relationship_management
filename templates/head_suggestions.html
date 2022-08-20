@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MyFlaskApp</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="{{ url_for('static', filename='sales.css') }}">
+
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+  </head>
+  <body>
+    <header class="header">
+      <a href="http://127.0.0.1:8000/" class="logo"> <img src="{{url_for('static',filename='images/crm-icon-high-seas.png')}}" width="80" height="80" >Hello {{user_name|capitalize}}</a>
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn"><span class="nav-icon">
+        
+      </span></label> 
+      <ul class="menu">
+        <li><a href="/head/profile ">Profile</a></li>
+        <li><a href="/head/sales">Sales</a></li>
+        <li><a href="/head/feedback" >Feedback</a></li>
+        <li><a href="/head/suggestions">Suggestions & analysis</a></li>
+        <li><a href="/head/sectorwiseanalysis">Sectorwise analysis</a></li>
+    </ul>
+  </header>
+  <div class="container">
+    <h4 style="text-align: center;">Returning users</h4>
+    <table class="table table-hover ">
+        <thead>
+          <tr>
+            
+            <th class="text-center" scope="col">Field-id</th>
+            <th class="text-center" scope="col">User-id</th>
+            <th class="text-center" scope="col">Name</th>
+            <th class="text-center" scope="col">Email</th>
+            <th class="text-center" scope="col">Profession</th>
+            <th class="text-center" scope="col">Gender</th>
+            <th class="text-center" scope="col">Location</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for value,key in domain_wise_ret_customers.items()%}
+              
+          {% for data in key%}
+              <tr>
+                <th class="text-center" scope="row">{{value}}</th>
+                <td class="text-center">{{data[0]}}</td>
+                <td class="text-center">{{data[1]}}</td>
+                <td class="text-center">{{data[2]}}</td>
+                <td class="text-center">{{data[3]}}</td>
+                <td class="text-center">{{data[4]}}</td>
+                <td class="text-center">{{data[5]}}</td>
+            </tr>  
+          {% endfor %}
+          {% endfor %}
+
+       </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+    
+    <h4 style="text-align: center;">Top Users</h4>
+    <table class="table table-hover ">
+        <thead>
+          <tr>
+            <th class="text-center" scope="col">Client-id</th>
+            
+            <th class="text-center" scope="col">Field-id</th>
+            <th class="text-center" scope="col">User-id</th>
+            <th class="text-center" scope="col">Name</th>
+            <th class="text-center" scope="col">Email</th>
+            <th class="text-center" scope="col">Profession</th>
+            <th class="text-center" scope="col">Gender</th>
+            <th class="text-center" scope="col">Location</th>
+            
+            <th class="text-center" scope="col">synergy</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {% for value in top_customers%}
+              
+              <tr>
+                <th class="text-center" scope="row">{{value[0]}}</th>
+                <td class="text-center">{{value[1]}}</td>
+                <td class="text-center">{{value[2]}}</td>
+                <td class="text-center">{{value[3]}}</td>
+                <td class="text-center">{{value[4]}}</td>
+                <td class="text-center">{{value[5]}}</td>
+                <td class="text-center">{{value[6]}}</td>
+                
+                <td class="text-center">{{value[7 ]}}</td>
+                <td class="text-center">{{value[8 ]}}</td>
+              </tr>  
+          {% endfor %}
+
+       </tbody>
+    </table>
+  </div>
+
+  <div class="container">
+    {%for i in suggestions%}
+      <h4><strong>Suggestion :{{loop.index}}</strong><h4>
+        <h4><p>{{i}}</p></h4><br>
+    {%endfor%}
+  </div>
+
+  </body>
+</html>
+

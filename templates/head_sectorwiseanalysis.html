@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>MyFlaskApp</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+   <link rel="stylesheet" href="{{ url_for('static', filename='sales.css') }}">
+
+   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+   <script type="text/javascript">
+     google.charts.load("current", {packages:['corechart']});
+     google.charts.setOnLoadCallback(drawSarahChart);
+
+    // Draw the pie chart for the Anthony's pizza when Charts is loaded.
+    google.charts.setOnLoadCallback(drawAnthonyChart);
+
+    // Callback that draws the pie chart for Sarah's pizza.
+    function drawSarahChart() {
+
+      // Create the data table for Sarah's pizza.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'SECTORS');
+      data.addColumn('number', 'value');
+      data.addRows([
+      {%- for location, num in sales_field.items() %}
+      ['{{ location }}', {{ num }}],
+      {%- endfor %}
+      ]);
+      
+
+      // Set options for Sarah's pie chart.
+      var options = {
+                    title:'SALES ACROSS SECTORS',
+                     hAxis:{
+                        title:'YEAR'
+                     },
+                     vAxis: {
+                       title:'UNITS OF SALES',
+                      baseline: 0
+                    }
+                  };
+
+      // Instantiate and draw the chart for Sarah's pizza.
+      
+
+      var chart = new google.visualization.PieChart(document.getElementById('columnchart_values'));
+
+      
+      chart.draw(data, options);
+    }
+    function drawAnthonyChart() {
+
+      // Create the data table for Anthony's pizza.
+      var data = new google.visualization.DataTable();
+      data.addColumn('string', 'SECTOR');
+      data.addColumn('number', 'AVERAGE RATING');
+      
+     mi= [
+      {% for key, value in feedback_field.items() %}
+              ['{{key}}',{{value}}],
+          {% endfor %}
+      ]
+      arr=[];
+      for (let i = 0; i < mi.length; i++)
+      {
+        if(mi[i][1]!=0) arr.push(mi[i]);
+      }
+
+      data.addRows(arr);
+
+      
+
+      // Set options for Anthony's pie cart.
+      var options = {title:'RATING ACROSS SECTORS',
+                      legend: 'none',
+                      hAxis:{
+                        title:'SECTOR id'
+                      },
+                      vAxis: {
+                        title:'AVERAGE RATING',
+                      baseline: 0
+                    },
+                    colors: ['#41d6b1','#41d6b1']
+                     };
+
+      // Instantiate and draw the chart for Anthony's pizza.
+      var chart = new google.visualization.ColumnChart(document.getElementById('columnchart_values1'));
+      chart.draw(data, options);
+    }
+
+
+
+     
+   </script>
+
+  </head>
+  <body>
+    <header class="header">
+      <a href="http://127.0.0.1:8000/" class="logo"> <img src="{{url_for('static',filename='images/crm-icon-high-seas.png')}}" width="80" height="80" >Hello {{user_name|capitalize}}</a>
+      <input class="menu-btn" type="checkbox" id="menu-btn" />
+      <label class="menu-icon" for="menu-btn"><span class="nav-icon">
+        
+      </span></label> 
+      <ul class="menu">
+        <li><a href="/head/profile ">Profile</a></li>
+        <li><a href="/head/sales">Sales</a></li>
+        <li><a href="/head/feedback" >Feedback</a></li>
+        <li><a href="/head/suggestions">Suggestions & analysis</a></li>
+        <li><a href="/head/sectorwiseanalysis">Sectorwise analysis</a></li>
+  
+      </ul>
+  </header>
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-sm-3 col-md-4 chitti" style="background-color:rgb(255, 255, 255);">
+        <div id="columnchart_values" class="chart"></div>
+      </div>
+      <div class="col-sm-3 col-md-4 chitti" style="background-color:rgb(255, 255, 255);">
+        <div id="columnchart_values1" class="chart"></div>
+      </div>
+
+    </div>
+    <div class="row tic">
+
+      <div class="col-sm-3 col-md-4 chitti" style="background-color:rgb(255, 255, 255);">
+      <h5>total sales revenue: {{total_sales}}</h5>
+      </div>
+    </div>
+
+  </div>
+
+
+
+  </body>
+</html>
+

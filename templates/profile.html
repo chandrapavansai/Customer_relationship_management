@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+body{
+   background:  rgba(32, 209, 171, 0.315);
+}
+.card {
+    background:  white  ;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  margin-top: 100px;
+  text-align: center;
+  font-family: arial;
+}
+
+.title {
+  color: rgb(80, 80, 80);
+  font-size: 18px;
+}
+
+button {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: rgba(43, 185, 155, 1);
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+a {
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+
+button:hover, a:hover {
+  opacity: 0.7;
+}
+</style>
+</head>
+<body>
+
+
+<div class="card">
+  <img src="{{url_for('static',filename='images/grey.jpg')}}" alt="John" style="width:100%">
+  <h1>{{values[0][1]}}</h1>
+  <p class="designation title"><strong>{{values[0][2]|capitalize}}</strong></p>
+  <p>client    : {{values[0][4]|capitalize}}</p>
+  <p>field     : {{values[0][3]}}</p>
+  <p>email     : {{values[0][5]}}</p>
+  <p>mobile no : {{values[0][6]}}</p>
+  <p><button href="mailto:{{values[0][5]}}">Contact</button></p>
+</div>
+
+</body>
+</html>
